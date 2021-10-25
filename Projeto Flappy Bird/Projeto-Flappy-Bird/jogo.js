@@ -139,9 +139,9 @@ function criaPlayer() {
 
 		atualizaFrameAtual() {
 			const intervaloDeFrames = 10;
-			const passouOIntervalo = frames % intervaloDeFrames;
+			const passouOIntervalo = frames % intervaloDeFrames === 0;
 
-			if (passouOIntervalo === 0) {
+			if (passouOIntervalo) {
 				const baseDoIncremento = 1;
 				const incremento = baseDoIncremento + flappyBird.frameAtual;
 				const baseRepeticao = flappyBird.movimentos.length;
