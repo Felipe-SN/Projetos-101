@@ -130,9 +130,9 @@ function criaPlayer() {
 		},
 
 		movimentos: [
-			{ sX:0, sY:0, },  // asa pra cima
-			{ sX:0, sY:26, }, // asa no meio 
-			{ sX:0, sY:52, }, // asa pra baixo
+			{ sX: 0, sY: 0, },  // asa pra cima
+			{ sX: 0, sY: 26, }, // asa no meio 
+			{ sX: 0, sY: 52, }, // asa pra baixo
 		],
 
 		frameAtual: 0,
@@ -187,6 +187,62 @@ const telaInicial = {
 	}
 };
 
+/// [parametros e funções usadas na criação dinamica de canos na tela]
+function criaCanos() {
+	const canos = {
+		larg: 52,
+		alt: 400,
+		chao: {
+			sX: 0,
+			sY: 169,
+		},
+		ceu: {
+			sX: 52,
+			sY: 169,
+		},
+		espaco: 80,
+		desenha() {
+			canos.pares.forEach(function(par) {
+				const yRandom = -2000;
+				const espacamentoCanos = 90;
+
+				const canoCeuX = 220;
+				const canoCeuY = yRandom;
+
+				// [Cano do Céu]
+				contexto.drawImage(
+					sprites,
+					canos.ceu.sX, canos.ceu.sY,
+					canos.larg, canos.alt,
+					canoCeuX, canoCeuY,
+					canos.larg, canos.alt,
+				)
+
+				const canoChaoX = 220;
+				const canoChaoY = canos.alt + espacamentoCanos + yRandom;
+				// [Cano do Chão]
+				contexto.drawImage(
+					sprites,
+					canos.chao.sX, canos.chao.sY,
+					canos.larg, canos.alt,
+					canoChaoX, canoChaoY,
+					canos.larg, canos.alt,
+				)
+			})
+		},
+
+		pares: [],
+		update() {
+			const passou100Frames = frames % 100 === 0;
+			if (passou100Frames) {
+
+			}
+		},
+	}
+
+	return canos;
+}
+
 //
 // [Telas]
 //
@@ -206,13 +262,15 @@ const telas = {
 		iniciar() {
 			globais.flappyBird = criaPlayer();
 			globais.chao = criaChao();
+			globais.canos = criaCanos();
 		},
 
 		desenha() {
 			planoDeFundo.desenha();
 			globais.chao.desenha();
 			globais.flappyBird.desenha();
-			telaInicial.desenha();
+			globais.canos.desenha();
+			// telaInicial.desenha();
 		},
 
 		click() {
@@ -221,6 +279,7 @@ const telas = {
 
 		update() {
 			globais.chao.update();
+			globais.canos.update();
 		}
 
 	},
@@ -239,6 +298,7 @@ const telas = {
 		update() {
 			globais.flappyBird.update();
 			globais.chao.update();
+			globais.canos.update();
 		}
 	}
 };
