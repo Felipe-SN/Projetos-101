@@ -12,7 +12,8 @@ sprites.src = './sprites.png';
 const canvas = document.querySelector('canvas');
 const contexto = canvas.getContext('2d');
 
-/// [parametros e funções usadas para criar o plano de fundo do cenario]
+/// [parametros e funções usadas para criar o cenario]
+/// [Plano de fundo do cenario]
 const planoDeFundo = {
 	srcX: 390,
 	srcY: 0,
@@ -45,8 +46,7 @@ const planoDeFundo = {
 
 };
 
-/// [parametros e funções usadas para criar o chão do cenario]
-
+/// [Chão do cenario]
 function criaChao() {
 
 	const chao = {
@@ -89,7 +89,6 @@ function criaChao() {
 }
 
 /// [parametros e funções usadas no Flappy-Bird]
-
 function colisao(flappyBird, chao) {
 	if (flappyBird.posY >= chao.posY - flappyBird.alt) {
 		return true
@@ -167,26 +166,6 @@ function criaPlayer() {
 	return flappyBird;
 }
 
-/// [parametros e funções usadas na tela de inicio do jogo, na mensagem "Get Ready"]
-const telaInicial = {
-	srcX: 134,
-	srcY: 0,
-	larg: 174,
-	alt: 152,
-	posX: (canvas.width / 2) - (174 / 2),
-	posY: 50,
-
-	desenha() {
-		contexto.drawImage(
-			sprites,
-			telaInicial.srcX, telaInicial.srcY,
-			telaInicial.larg, telaInicial.alt,
-			telaInicial.posX, telaInicial.posY,
-			telaInicial.larg, telaInicial.alt,
-		);
-	}
-};
-
 /// [parametros e funções usadas na criação dinamica de canos na tela]
 function criaCanos() {
 	const canos = {
@@ -230,31 +209,31 @@ function criaCanos() {
 				)
 
 				par.canoCeu = {
-          x: canoCeuX,
-          y: canos.alt + canoCeuY
-        }
-        par.canoChao = {
-          x: canoChaoX,
-          y: canoChaoY
-        }
+					x: canoCeuX,
+					y: canos.alt + canoCeuY
+				}
+				par.canoChao = {
+					x: canoChaoX,
+					y: canoChaoY
+				}
 			})
 		},
 
 		temColisaoComPlayer(par) {
-      const cabecaDoFlappy = globais.flappyBird.posY;
-      const peDoFlappy = globais.flappyBird.posY + globais.flappyBird.alt;
-      
-      if((globais.flappyBird.posX + globais.flappyBird.larg) >= par.x) {
-        if(cabecaDoFlappy <= par.canoCeu.y) {
-          return true;
-        }
+			const cabecaDoFlappy = globais.flappyBird.posY;
+			const peDoFlappy = globais.flappyBird.posY + globais.flappyBird.alt;
 
-        if(peDoFlappy >= par.canoChao.y) {
-          return true;
-        }
-      }
-      return false;
-    },
+			if ((globais.flappyBird.posX + globais.flappyBird.larg) >= par.x) {
+				if (cabecaDoFlappy <= par.canoCeu.y) {
+					return true;
+				}
+
+				if (peDoFlappy >= par.canoChao.y) {
+					return true;
+				}
+			}
+			return false;
+		},
 
 		pares: [],
 		update() {
@@ -270,7 +249,7 @@ function criaCanos() {
 				par.x = par.x - 2;
 
 				if (canos.temColisaoComPlayer(par)) {
-					console.log (`Você Perdeu!`);
+					console.log(`Você Perdeu!`);
 					hitSound.play();
 					trocarTela(telas.inicio);
 				}
@@ -284,6 +263,26 @@ function criaCanos() {
 
 	return canos;
 }
+
+/// [parametros e funções usadas na tela de inicio do jogo, na mensagem "Get Ready"]
+const getReady = {
+	srcX: 134,
+	srcY: 0,
+	larg: 174,
+	alt: 152,
+	posX: (canvas.width / 2) - (174 / 2),
+	posY: 50,
+
+	desenha() {
+		contexto.drawImage(
+			sprites,
+			getReady.srcX, getReady.srcY,
+			getReady.larg, getReady.alt,
+			getReady.posX, getReady.posY,
+			getReady.larg, getReady.alt,
+		);
+	}
+};
 
 //
 // [Telas]
@@ -311,7 +310,7 @@ const telas = {
 			planoDeFundo.desenha();
 			globais.flappyBird.desenha();
 			globais.chao.desenha();
-			telaInicial.desenha();
+			getReady.desenha();
 		},
 
 		click() {
@@ -325,11 +324,16 @@ const telas = {
 	},
 
 	gamePlay: {
+		iniciar() {
+			globais.pontuacao.criaPontuacao();
+		},
+
 		desenha() {
 			planoDeFundo.desenha();
 			globais.canos.desenha();
 			globais.chao.desenha();
 			globais.flappyBird.desenha();
+			globais.pontuacao.desenha();
 		},
 
 		click() {
@@ -340,6 +344,7 @@ const telas = {
 			globais.canos.update();
 			globais.chao.update();
 			globais.flappyBird.update();
+			globais.pontuacao.update();
 		}
 	}
 
