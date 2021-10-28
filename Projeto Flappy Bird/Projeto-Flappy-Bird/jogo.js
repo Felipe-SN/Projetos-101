@@ -13,40 +13,45 @@ const canvas = document.querySelector('canvas');
 const contexto = canvas.getContext('2d');
 
 /// [parametros e funções usadas para criar o cenario]
-/// [Plano de fundo do cenario]
-const planoDeFundo = {
-	srcX: 390,
-	srcY: 0,
-	larg: 275,
-	alt: 204,
-	posX: 0,
-	posY: canvas.height - 204,
+// [Plano de fundo do cenario]
+function criaPlanoDeFundo() {
 
-	desenha() {
+	const planoDeFundo = {
+		srcX: 390,
+		srcY: 0,
+		larg: 275,
+		alt: 204,
+		posX: 0,
+		posY: canvas.height - 204,
 
-		contexto.fillStyle = `#70c5ce`;
-		contexto.fillRect(0, 0, canvas.width, canvas.height);
+		desenha() {
 
-		contexto.drawImage(
-			sprites,
-			planoDeFundo.srcX, planoDeFundo.srcY, // Posição x e y do sprite no arquivo fonte
-			planoDeFundo.larg, planoDeFundo.alt, // Tamanho do recorte na sprite
-			planoDeFundo.posX, planoDeFundo.posY, // posição no canvas onde o sprite vai ser desenhado
-			planoDeFundo.larg, planoDeFundo.alt, // Tamanho do sprite desenhado no canvas
-		);
+			contexto.fillStyle = `#70c5ce`;
+			contexto.fillRect(0, 0, canvas.width, canvas.height);
 
-		contexto.drawImage(
-			sprites,
-			planoDeFundo.srcX, planoDeFundo.srcY, // Posição x e y do sprite no arquivo fonte
-			planoDeFundo.larg, planoDeFundo.alt, // Tamanho do recorte na sprite
-			(planoDeFundo.posX + planoDeFundo.larg), planoDeFundo.posY, // posição no canvas onde o sprite vai ser desenhado
-			planoDeFundo.larg, planoDeFundo.alt, // Tamanho do sprite desenhado no canvas
-		);
-	},
+			contexto.drawImage(
+				sprites,
+				planoDeFundo.srcX, planoDeFundo.srcY, // Posição x e y do sprite no arquivo fonte
+				planoDeFundo.larg, planoDeFundo.alt, // Tamanho do recorte na sprite
+				planoDeFundo.posX, planoDeFundo.posY, // posição no canvas onde o sprite vai ser desenhado
+				planoDeFundo.larg, planoDeFundo.alt, // Tamanho do sprite desenhado no canvas
+			);
 
-};
+			contexto.drawImage(
+				sprites,
+				planoDeFundo.srcX, planoDeFundo.srcY, // Posição x e y do sprite no arquivo fonte
+				planoDeFundo.larg, planoDeFundo.alt, // Tamanho do recorte na sprite
+				(planoDeFundo.posX + planoDeFundo.larg), planoDeFundo.posY, // posição no canvas onde o sprite vai ser desenhado
+				planoDeFundo.larg, planoDeFundo.alt, // Tamanho do sprite desenhado no canvas
+			);
+		},
 
-/// [Chão do cenario]
+	};
+
+	return planoDeFundo;
+}
+
+// [Chão do cenario]
 function criaChao() {
 
 	const chao = {
@@ -264,6 +269,26 @@ function criaCanos() {
 	return canos;
 }
 
+function criaPlacar() {
+
+	const placar = {
+		pontos: 0,
+
+		desenha() {
+			contexto.font = `35px "VT323"`;
+			contexto.textAlign = `right`;
+			contexto.fillStyle = `white`;
+			contexto.fillText(`${placar.pontos}`, canvas.width - 10, 35);
+		},
+
+		update() {
+			
+		}
+	}
+
+	return placar;
+}
+
 /// [parametros e funções usadas na tela de inicio do jogo, na mensagem "Get Ready"]
 const getReady = {
 	srcX: 134,
@@ -301,13 +326,14 @@ function trocarTela(novaTela) {
 const telas = {
 	inicio: {
 		iniciar() {
+			globais.planoDeFundo = criaPlanoDeFundo();
 			globais.flappyBird = criaPlayer();
 			globais.chao = criaChao();
 			globais.canos = criaCanos();
 		},
 
 		desenha() {
-			planoDeFundo.desenha();
+			globais.planoDeFundo.desenha();
 			globais.flappyBird.desenha();
 			globais.chao.desenha();
 			getReady.desenha();
@@ -325,15 +351,15 @@ const telas = {
 
 	gamePlay: {
 		iniciar() {
-			globais.pontuacao.criaPontuacao();
+			globais.placar = criaPlacar();
 		},
 
 		desenha() {
-			planoDeFundo.desenha();
+			globais.planoDeFundo.desenha();
+			globais.flappyBird.desenha();
 			globais.canos.desenha();
 			globais.chao.desenha();
-			globais.flappyBird.desenha();
-			globais.pontuacao.desenha();
+			globais.placar.desenha();
 		},
 
 		click() {
@@ -344,7 +370,7 @@ const telas = {
 			globais.canos.update();
 			globais.chao.update();
 			globais.flappyBird.update();
-			globais.pontuacao.update();
+			globais.placar.update();
 		}
 	}
 
