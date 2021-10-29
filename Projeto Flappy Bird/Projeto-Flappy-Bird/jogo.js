@@ -315,6 +315,29 @@ const gameOver = {
 	posX: (canvas.width / 2) - (226 / 2),
 	posY: 50,
 
+	medalhas: [
+		{
+			srcX: 0, srcY: 78,
+			larg: 44, alt: 44,
+			posX: 20, posY: 20
+		},
+		{
+			srcX: 48, srcY: 124,
+			larg: 44, alt: 44,
+			posX: 50, posY: 20
+		},
+		{
+			srcX: 48, srcY: 78,
+			larg: 44, alt: 44,
+			posX: 80, posY: 20
+		},
+		{
+			srcX: 0, srcY: 124,
+			larg: 44, alt: 44,
+			posX: 110, posY: 20
+		},
+	],
+
 	desenha() {
 		contexto.drawImage(
 			sprites,
@@ -323,6 +346,15 @@ const gameOver = {
 			gameOver.posX, gameOver.posY,
 			gameOver.larg, gameOver.alt,
 		);
+
+		switch (globais.placar.pontos) {
+			case globais.placar.pontos > 50:
+
+				break;
+
+			default:
+				break;
+		}
 	}
 };
 
