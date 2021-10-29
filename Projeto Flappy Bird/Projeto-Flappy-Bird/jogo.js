@@ -47,7 +47,6 @@ function criaPlanoDeFundo() {
 		},
 
 	};
-
 	return planoDeFundo;
 }
 
@@ -89,7 +88,6 @@ function criaChao() {
 		},
 
 	};
-
 	return chao;
 }
 
@@ -122,10 +120,7 @@ function criaPlayer() {
 		update() {
 			if (colisao(flappyBird, globais.chao)) {
 				hitSound.play();
-				setTimeout(() => {
-					trocarTela(telas.inicio);
-				}, 500);
-
+					trocarTela(telas.gameOver);
 				return;
 			}
 
@@ -167,7 +162,6 @@ function criaPlayer() {
 			);
 		}
 	};
-
 	return flappyBird;
 }
 
@@ -256,7 +250,7 @@ function criaCanos() {
 				if (canos.temColisaoComPlayer(par)) {
 					console.log(`Você Perdeu!`);
 					hitSound.play();
-					trocarTela(telas.inicio);
+					trocarTela(telas.gameOver);
 				}
 
 				if (par.x + canos.larg <= 0) {
@@ -265,7 +259,6 @@ function criaCanos() {
 			});
 		}
 	}
-
 	return canos;
 }
 
@@ -282,10 +275,14 @@ function criaPlacar() {
 		},
 
 		update() {
-			
+			const intervaloDeFrames = 20;
+			const passouOIntervalo = frames % intervaloDeFrames === 0;
+
+			if (passouOIntervalo) {
+				placar.pontos += 1;
+			}
 		}
 	}
-
 	return placar;
 }
 
@@ -305,6 +302,26 @@ const getReady = {
 			getReady.larg, getReady.alt,
 			getReady.posX, getReady.posY,
 			getReady.larg, getReady.alt,
+		);
+	}
+};
+
+/// [parametros e funções usadas na tela de fim do jogo, na mensagem "Game Over"]
+const gameOver = {
+	srcX: 134,
+	srcY: 153,
+	larg: 226,
+	alt: 200,
+	posX: (canvas.width / 2) - (226 / 2),
+	posY: 50,
+
+	desenha() {
+		contexto.drawImage(
+			sprites,
+			gameOver.srcX, gameOver.srcY,
+			gameOver.larg, gameOver.alt,
+			gameOver.posX, gameOver.posY,
+			gameOver.larg, gameOver.alt,
 		);
 	}
 };
@@ -372,11 +389,21 @@ const telas = {
 			globais.flappyBird.update();
 			globais.placar.update();
 		}
+	},
+
+	gameOver: {
+		desenha() {
+			gameOver.desenha();
+		},
+
+		update() {
+
+		},
+
+		click() {
+			trocarTela(telas.inicio);
+		}
 	}
-
-	// Game_Over: {
-
-	// }
 };
 
 function loop() {
