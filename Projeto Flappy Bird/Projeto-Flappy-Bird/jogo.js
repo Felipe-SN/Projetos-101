@@ -120,7 +120,7 @@ function criaPlayer() {
 		update() {
 			if (colisao(flappyBird, globais.chao)) {
 				hitSound.play();
-					trocarTela(telas.gameOver);
+				trocarTela(telas.gameOver);
 				return;
 			}
 
