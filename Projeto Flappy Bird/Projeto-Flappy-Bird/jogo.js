@@ -338,6 +338,21 @@ const gameOver = {
 		},
 	],
 
+	medalhaAtual: 0,
+
+	atualizaMedalha() {
+		const intervaloDePontos = 50;
+		const passouOIntervalo = globais.placar.pontos % intervaloDePontos === 0;
+
+		if (passouOIntervalo) {
+			const baseDoIncremento = 1;
+			const incremento = baseDoIncremento + gameOver.medalhaAtual;
+			const baseRepeticao = gameOver.medalhas.length;
+			gameOver.medalhaAtual = incremento % baseRepeticao;
+		}
+
+	},
+
 	desenha() {
 		contexto.drawImage(
 			sprites,
@@ -347,14 +362,20 @@ const gameOver = {
 			gameOver.larg, gameOver.alt,
 		);
 
-		switch (globais.placar.pontos) {
-			case globais.placar.pontos > 50:
+		gameOver.atualizaMedalha()
+		const {
+			srcX, srcY,
+			larg, alt,
+			posX, posY,
+		} = gameOver.medalhas[gameOver.medalhaAtual];
 
-				break;
-
-			default:
-				break;
-		}
+		contexto.drawImage(
+			sprites,
+			srcX, srcY,
+			larg, alt,
+			posX, posY,
+			larg, alt,
+		);
 	}
 };
 
