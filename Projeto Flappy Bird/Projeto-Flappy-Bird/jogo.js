@@ -478,7 +478,7 @@ const telas = {
 		},
 
 		update() {
-			
+
 		},
 
 		click() {
