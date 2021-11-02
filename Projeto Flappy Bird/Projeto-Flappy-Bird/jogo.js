@@ -2,6 +2,7 @@ console.log('[DevSoutinho] Flappy Bird');
 console.log('Inscreva-se no canal :D https://www.youtube.com/channel/UCzR2u5RWXWjUh7CwLSvbitA');
 
 let frames = 0;
+let medalhaAtual = 0;
 
 const hitSound = new Audio();
 hitSound.src = './efeitos/hit.wav';
@@ -23,6 +24,13 @@ function criaPlanoDeFundo() {
 		alt: 204,
 		posX: 0,
 		posY: canvas.height - 204,
+
+		update() {
+			const movimentoBG = 1;
+			const repetirEm = planoDeFundo.larg / 2;
+			const movimentar = planoDeFundo.posX - movimentoBG;
+			planoDeFundo.posX = movimentar % repetirEm;
+		},
 
 		desenha() {
 
@@ -307,77 +315,89 @@ const getReady = {
 };
 
 /// [parametros e funções usadas na tela de fim do jogo, na mensagem "Game Over"]
-const gameOver = {
-	srcX: 134,
-	srcY: 153,
-	larg: 226,
-	alt: 200,
-	posX: (canvas.width / 2) - (226 / 2),
-	posY: 50,
+function criaGameOver() {
+	const gameOver = {
+		srcX: 134,
+		srcY: 153,
+		larg: 226,
+		alt: 200,
+		posX: (canvas.width / 2) - (226 / 2),
+		posY: 50,
 
-	medalhas: [
-		{
-			srcX: 0, srcY: 78,
-			larg: 44, alt: 44,
-			posX: 20, posY: 20
-		},
-		{
-			srcX: 48, srcY: 124,
-			larg: 44, alt: 44,
-			posX: 50, posY: 20
-		},
-		{
-			srcX: 48, srcY: 78,
-			larg: 44, alt: 44,
-			posX: 80, posY: 20
-		},
-		{
-			srcX: 0, srcY: 124,
-			larg: 44, alt: 44,
-			posX: 110, posY: 20
-		},
-	],
+		medalhas: [
+			{
+				srcX: 0, srcY: 78,
+				larg: 44, alt: 44,
+			},
+			{
+				srcX: 48, srcY: 124,
+				larg: 44, alt: 44,
+			},
+			{
+				srcX: 48, srcY: 78,
+				larg: 44, alt: 44,
+			},
+			{
+				srcX: 0, srcY: 124,
+				larg: 44, alt: 44,
+			},
+		],
 
-	medalhaAtual: 0,
+		atualizaMedalha() {
+			const intervaloDePontos = 50;
+			const passouOIntervalo = globais.placar.pontos % intervaloDePontos === 0;
 
-	atualizaMedalha() {
-		const intervaloDePontos = 50;
-		const passouOIntervalo = globais.placar.pontos % intervaloDePontos === 0;
+			if (passouOIntervalo && medalhaAtual < 3 && globais.placar.pontos !== 0) {
+				const baseDoIncremento = 1;
+				const incremento = baseDoIncremento + medalhaAtual;
+				const baseRepeticao = gameOver.medalhas.length;
+				medalhaAtual = incremento % baseRepeticao;
+			}
 
-		if (passouOIntervalo) {
-			const baseDoIncremento = 1;
-			const incremento = baseDoIncremento + gameOver.medalhaAtual;
-			const baseRepeticao = gameOver.medalhas.length;
-			gameOver.medalhaAtual = incremento % baseRepeticao;
+		},
+
+		desenha() {
+			contexto.drawImage(
+				sprites,
+				gameOver.srcX, gameOver.srcY,
+				gameOver.larg, gameOver.alt,
+				gameOver.posX, gameOver.posY,
+				gameOver.larg, gameOver.alt,
+			)
+
+			const {
+				srcX, srcY,
+				larg, alt,
+			} = gameOver.medalhas[medalhaAtual];
+
+			contexto.drawImage(
+				sprites,
+				srcX, srcY,
+				larg, alt,
+				posX = 72, posY = canvas.height / 3.5,
+				larg, alt,
+			)
+		},
+
+		update() {
+			const intervaloDeFrames = 20;
+			const passouOIntervalo = frames % intervaloDeFrames === 0;
+
+			if (passouOIntervalo) {
+				gameOver.atualizaMedalha();
+			}
+
+			if (telaAtiva.inicio) {
+				medalhaAtual = 0;
+			}
+		},
+
+		click() {
+			medalhaAtual = 0;
 		}
-
-	},
-
-	desenha() {
-		contexto.drawImage(
-			sprites,
-			gameOver.srcX, gameOver.srcY,
-			gameOver.larg, gameOver.alt,
-			gameOver.posX, gameOver.posY,
-			gameOver.larg, gameOver.alt,
-		);
-
-		gameOver.atualizaMedalha()
-		const {
-			srcX, srcY,
-			larg, alt,
-			posX, posY,
-		} = gameOver.medalhas[gameOver.medalhaAtual];
-
-		contexto.drawImage(
-			sprites,
-			srcX, srcY,
-			larg, alt,
-			posX, posY,
-			larg, alt,
-		);
 	}
-};
+	return gameOver;
+}
 
 //
 // [Telas]
@@ -396,6 +416,7 @@ function trocarTela(novaTela) {
 const telas = {
 	inicio: {
 		iniciar() {
+			globais.gameOver = criaGameOver();
 			globais.planoDeFundo = criaPlanoDeFundo();
 			globais.flappyBird = criaPlayer();
 			globais.chao = criaChao();
@@ -415,6 +436,7 @@ const telas = {
 
 		update() {
 			globais.chao.update();
+			globais.planoDeFundo.update();
 		}
 
 	},
@@ -437,6 +459,8 @@ const telas = {
 		},
 
 		update() {
+			globais.gameOver.update();
+			globais.planoDeFundo.update();
 			globais.canos.update();
 			globais.chao.update();
 			globais.flappyBird.update();
@@ -445,16 +469,21 @@ const telas = {
 	},
 
 	gameOver: {
+		iniciar() {
+			globais.gameOver = criaGameOver();
+		},
+
 		desenha() {
-			gameOver.desenha();
+			globais.gameOver.desenha();
 		},
 
 		update() {
-
+			
 		},
 
 		click() {
 			trocarTela(telas.inicio);
+			globais.gameOver.click();
 		}
 	}
 };
