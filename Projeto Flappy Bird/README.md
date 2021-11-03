@@ -6,9 +6,9 @@ Este foi um projeto que foi desenvolvido para aprimorar minhas noções e conhec
 
 ## Como rodar este projeto
 
-	1. Baixe a pasta Assets.
+	1. Baixe a pasta assets.
 
-	2. Abra a pasta Assets.
+	2. Abra a pasta assets.
 
 	3. De um clique-duplo no arquivo index.html para abri-lo em seu navegador padrão.
 
