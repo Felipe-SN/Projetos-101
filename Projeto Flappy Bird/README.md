@@ -2,7 +2,7 @@
 
 ## Sobre
 
-Este foi um projeto que foi desenvolvido para aprimorar minhas noções e conhecimentos em JacaScript.
+Este foi um projeto que foi desenvolvido para aprimorar minhas noções e conhecimentos em JavaScript.
 
 ## Como rodar este projeto
 
