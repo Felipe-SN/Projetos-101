@@ -374,7 +374,7 @@ function criaGameOver() {
 				sprites,
 				srcX, srcY,
 				larg, alt,
-				posX = 72, posY = canvas.height / 3.5,
+				72, canvas.height / 3.5,
 				larg, alt,
 			)
 		},
@@ -385,10 +385,6 @@ function criaGameOver() {
 
 			if (passouOIntervalo) {
 				gameOver.atualizaMedalha();
-			}
-
-			if (telaAtiva.inicio) {
-				medalhaAtual = 0;
 			}
 		},
 
