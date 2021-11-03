@@ -1,3 +1,21 @@
+# Flappy Bird
+
+## Sobre
+
+Este foi um projeto que foi desenvolvido para aprimorar minhas noções e conhecimentos em JacaScript.
+
+## Como rodar este projeto
+
+	1. Baixe a pasta Assets.
+
+	2. Abra a pasta Assets.
+
+	3. De um clique-duplo no arquivo index.html para abri-lo em seu navegador padrão.
+
+	4. Agora é só jogar.
+
+# README do Projeto Origonal do Canal Dev Soutinho (fortalece o projeto dele e se inscreve lá =D)
+
 # Flappy Bird: Dev Soutinho 
 
 [![Série](https://img.shields.io/badge/DevSoutinho-Flappy%20Bird-orange)](https://www.youtube.com/watch?v=jOAU81jdi-c&list=PLTcmLKdIkOWmeNferJ292VYKBXydGeDej)
