@@ -345,13 +345,12 @@ function criaGameOver() {
 
 		atualizaMedalha() {
 			const intervaloDePontos = 50;
-			const passouOIntervalo = globais.placar.pontos % intervaloDePontos === 0;
+			const passouOIntervalo = globais.placar.pontos % intervaloDePontos === 0 && medalhaAtual < 3 && globais.placar.pontos !== 0;
 
-			if (passouOIntervalo && medalhaAtual < 3 && globais.placar.pontos !== 0) {
+			if (passouOIntervalo) {
 				const baseDoIncremento = 1;
 				const incremento = baseDoIncremento + medalhaAtual;
-				const baseRepeticao = gameOver.medalhas.length;
-				medalhaAtual = incremento % baseRepeticao;
+				medalhaAtual = incremento;
 			}
 
 		},
