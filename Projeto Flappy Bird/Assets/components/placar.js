@@ -16,7 +16,7 @@ function criaPlacar() {
 			const passouOIntervalo = frames % intervaloDeFrames === 0;
 
 			if (passouOIntervalo) {
-				placar.pontos += 1;
+				placar.pontos++;
 			}
 		},
 	};

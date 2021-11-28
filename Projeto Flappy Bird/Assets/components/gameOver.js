@@ -42,7 +42,7 @@ function criaGameOver() {
 			const intervaloDePontos = 50;
 			const passouOIntervalo =
 				globais.placar.pontos % intervaloDePontos === 0 &&
-				medalhaAtual < 3 &&
+				medalhaAtual < gameOver.medalhas.length - 1 &&
 				globais.placar.pontos !== 0;
 
 			if (passouOIntervalo) {
@@ -53,6 +53,8 @@ function criaGameOver() {
 		},
 
 		desenha() {
+			const { srcX, srcY, larg, alt } = gameOver.medalhas[medalhaAtual];
+
 			contexto.drawImage(
 				sprites,
 				gameOver.srcX,
@@ -64,8 +66,6 @@ function criaGameOver() {
 				gameOver.larg,
 				gameOver.alt
 			);
-
-			const { srcX, srcY, larg, alt } = gameOver.medalhas[medalhaAtual];
 
 			contexto.drawImage(
 				sprites,
