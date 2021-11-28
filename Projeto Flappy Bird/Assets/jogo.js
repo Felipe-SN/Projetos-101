@@ -1,5 +1,15 @@
+import criaCanos from './components/canos.js';
+import criaChao from './components/chao.js';
+import criaGameOver from './components/gameOver.js';
+import criaPlacar from './components/placar.js';
+import criaPlanoDeFundo from './components/planoDeFundo.js';
+import criaPlayer from './components/player.js';
+import criaTelaInicio from './components/inicio.js';
+
 console.log('[DevSoutinho] Flappy Bird');
-console.log('Inscreva-se no canal :D https://www.youtube.com/channel/UCzR2u5RWXWjUh7CwLSvbitA');
+console.log(
+	'Inscreva-se no canal :D https://www.youtube.com/channel/UCzR2u5RWXWjUh7CwLSvbitA'
+);
 
 let frames = 0;
 
@@ -30,13 +40,14 @@ const telas = {
 			globais.flappyBird = criaPlayer();
 			globais.chao = criaChao();
 			globais.canos = criaCanos();
+			globais.getReady = criaTelaInicio();
 		},
 
 		desenha() {
 			globais.planoDeFundo.desenha();
 			globais.flappyBird.desenha();
 			globais.chao.desenha();
-			getReady.desenha();
+			globais.getReady.desenha();
 		},
 
 		click() {
@@ -46,8 +57,7 @@ const telas = {
 		update() {
 			globais.chao.update();
 			globais.planoDeFundo.update();
-		}
-
+		},
 	},
 
 	gamePlay: {
@@ -74,7 +84,7 @@ const telas = {
 			globais.chao.update();
 			globais.flappyBird.update();
 			globais.placar.update();
-		}
+		},
 	},
 
 	gameOver: {
@@ -86,15 +96,13 @@ const telas = {
 			globais.gameOver.desenha();
 		},
 
-		update() {
-
-		},
+		update() {},
 
 		click() {
 			trocarTela(telas.inicio);
 			globais.gameOver.click();
-		}
-	}
+		},
+	},
 };
 
 function loop() {
@@ -114,3 +122,14 @@ window.addEventListener(`click`, function () {
 
 trocarTela(telas.inicio);
 loop();
+
+export {
+	canvas,
+	contexto,
+	globais,
+	hitSound,
+	sprites,
+	trocarTela,
+	telas,
+	frames,
+};
