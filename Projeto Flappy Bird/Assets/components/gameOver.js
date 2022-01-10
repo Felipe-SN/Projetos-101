@@ -1,8 +1,12 @@
-import { canvas, contexto, globais, sprites, frames } from '../jogo.js';
+import { canvas, contexto, globais, sprites, frames, pontos } from '../jogo.js';
 
-/// [parametros e funções usadas na tela de fim do jogo, na mensagem "Game Over"]
+/// [parâmetros e funções usadas na tela de fim do jogo, na mensagem "Game Over"]
 let medalhaAtual = 0;
 function criaGameOver() {
+	const pontuacaoFinal = {
+		pontos,
+	};
+
 	const gameOver = {
 		srcX: 134,
 		srcY: 153,
@@ -93,7 +97,7 @@ function criaGameOver() {
 			medalhaAtual = 0;
 		},
 	};
-	return gameOver;
+	return gameOver, pontuacaoFinal;
 }
 
 export default criaGameOver;

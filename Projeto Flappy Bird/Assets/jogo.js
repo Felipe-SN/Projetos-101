@@ -114,12 +114,20 @@ function loop() {
 	requestAnimationFrame(loop);
 }
 
+function leTeclado(event) {
+	const espaco = 32;
+	if (event.keyCode == espaco) {
+		telaAtiva.click();
+	}
+}
+
 window.addEventListener(`click`, function () {
 	if (telaAtiva.click) {
 		telaAtiva.click();
 	}
 });
 
+document.onkeydown = leTeclado;
 trocarTela(telas.inicio);
 loop();
 
