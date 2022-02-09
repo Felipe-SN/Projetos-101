@@ -6,15 +6,14 @@ function criaPlacar() {
 
 		desenha() {
 			const telaGameOver = telaAtiva === telas.gameOver;
-			let corTexto = 'white';
-			if (telaGameOver) {
-				corTexto = '#70c5ce00';
+			if (!telaGameOver) {
+				contexto.font = `35px "VT323"`;
+				contexto.textAlign = `right`;
+				contexto.fillStyle = 'white';
+				contexto.fillText(`${placar.pontos}`, canvas.width - 10, 35);
+			} else {
+				contexto.clearRect(0, 0, canvas.width, canvas.height);
 			}
-			contexto.font = `35px "VT323"`;
-			contexto.textAlign = `right`;
-			contexto.fillStyle = corTexto;
-			contexto.shadowColor = corTexto;
-			contexto.fillText(`${placar.pontos}`, canvas.width - 10, 35);
 		},
 
 		update() {

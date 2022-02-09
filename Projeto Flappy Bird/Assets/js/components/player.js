@@ -6,6 +6,7 @@ import {
 	trocarTela,
 	telas,
 	frames,
+	telaAtiva,
 } from '../jogo.js';
 
 /// [parametros e funções usadas no Flappy-Bird]
@@ -53,14 +54,17 @@ function criaPlayer() {
 		frameAtual: 0,
 
 		atualizaFrameAtual() {
-			const intervaloDeFrames = 10;
-			const passouOIntervalo = frames % intervaloDeFrames === 0;
+			const telaGameOver = telaAtiva === telas.gameOver;
+			if (!telaGameOver) {
+				const intervaloDeFrames = 10;
+				const passouOIntervalo = frames % intervaloDeFrames === 0;
 
-			if (passouOIntervalo) {
-				const baseDoIncremento = 1;
-				const incremento = baseDoIncremento + flappyBird.frameAtual;
-				const baseRepeticao = flappyBird.movimentos.length;
-				flappyBird.frameAtual = incremento % baseRepeticao;
+				if (passouOIntervalo) {
+					const baseDoIncremento = 1;
+					const incremento = baseDoIncremento + flappyBird.frameAtual;
+					const baseRepeticao = flappyBird.movimentos.length;
+					flappyBird.frameAtual = incremento % baseRepeticao;
+				}
 			}
 		},
 

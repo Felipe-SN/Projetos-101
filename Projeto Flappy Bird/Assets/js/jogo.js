@@ -94,6 +94,10 @@ const telas = {
 
 		desenha() {
 			globais.placar.desenha();
+			globais.planoDeFundo.desenha();
+			globais.flappyBird.desenha();
+			globais.canos.desenha();
+			globais.chao.desenha();
 			globais.gameOver.desenha();
 		},
 

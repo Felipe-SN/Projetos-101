@@ -53,6 +53,9 @@ function criaGameOver() {
 		},
 
 		desenha() {
+			contexto.fillStyle = `rgba(0, 0, 0, 0.3)`;
+			contexto.fillRect(0, 0, canvas.width, canvas.height);
+
 			const { srcX, srcY, larg, alt } = gameOver.medalhas[medalhaAtual];
 			//desenha moldura do placar da tela de game over
 			contexto.drawImage(
