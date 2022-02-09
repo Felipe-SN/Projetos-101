@@ -66,7 +66,7 @@ function criaGameOver() {
 				gameOver.larg,
 				gameOver.alt
 			);
-				//desenha medalhas na tela de game over
+			//desenha medalhas na tela de game over
 			contexto.drawImage(
 				sprites,
 				srcX,
@@ -78,13 +78,15 @@ function criaGameOver() {
 				larg,
 				alt
 			);
-				//desenha texto com a pontuação do jogador
+			//desenha texto com a pontuação do jogador
 			contexto.font = `35px "VT323"`;
 			contexto.textAlign = `right`;
-			contexto.fillStyle = `black`;
+			contexto.shadowOffsetY = 2;
+			contexto.shadowColor = '#f4eea5';
+			contexto.fillStyle = `#d7a84c`;
 			contexto.fillText(
 				`${globais.placar.pontos}`,
-				canvas.width - 95,
+				canvas.width - 65,
 				canvas.height - 333
 			);
 		},

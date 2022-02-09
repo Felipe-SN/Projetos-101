@@ -7,10 +7,10 @@ Este foi um projeto que foi desenvolvido para aprimorar minhas noções e conhec
 ## Como rodar este projeto
 
 ### Passo 1 
-Baixe a pasta assets.
+Baixe a pasta Projeto Flappy Bird.
 
 ### Passo 2
-Abra a pasta assets.
+Abra a pasta Projeto Flappy Bird.
 
 ### Passo	3
 De um clique-duplo no arquivo index.html para abri-lo em seu navegador padrão.
@@ -20,7 +20,7 @@ Agora é só jogar.
 
 
 
-# README do Projeto Origonal do Canal Dev Soutinho (fortalece o projeto dele e se inscreve lá =D)
+# README do Projeto Original do Canal Dev Soutinho (fortalece o projeto dele e se inscreve lá =D)
 
 # Flappy Bird: Dev Soutinho 
 

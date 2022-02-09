@@ -14,10 +14,10 @@ console.log(
 let frames = 0;
 
 const hitSound = new Audio();
-hitSound.src = './efeitos/hit.wav';
+hitSound.src = './assets/sounds/hit.wav';
 
 const sprites = new Image();
-sprites.src = './sprites.png';
+sprites.src = './assets/images/sprites.png';
 
 const canvas = document.querySelector('canvas');
 const contexto = canvas.getContext('2d');
@@ -93,6 +93,7 @@ const telas = {
 		},
 
 		desenha() {
+			globais.placar.desenha();
 			globais.gameOver.desenha();
 		},
 
@@ -140,4 +141,5 @@ export {
 	trocarTela,
 	telas,
 	frames,
+	telaAtiva,
 };
