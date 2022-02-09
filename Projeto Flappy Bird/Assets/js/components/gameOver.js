@@ -1,12 +1,8 @@
-import { canvas, contexto, globais, sprites, frames, pontos } from '../jogo.js';
+import { canvas, contexto, globais, sprites, frames } from '../jogo.js';
 
 /// [parâmetros e funções usadas na tela de fim do jogo, na mensagem "Game Over"]
 let medalhaAtual = 0;
 function criaGameOver() {
-	const pontuacaoFinal = {
-		pontos,
-	};
-
 	const gameOver = {
 		srcX: 134,
 		srcY: 153,
@@ -58,7 +54,7 @@ function criaGameOver() {
 
 		desenha() {
 			const { srcX, srcY, larg, alt } = gameOver.medalhas[medalhaAtual];
-
+			//desenha moldura do placar da tela de game over
 			contexto.drawImage(
 				sprites,
 				gameOver.srcX,
@@ -70,7 +66,7 @@ function criaGameOver() {
 				gameOver.larg,
 				gameOver.alt
 			);
-
+				//desenha medalhas na tela de game over
 			contexto.drawImage(
 				sprites,
 				srcX,
@@ -81,6 +77,15 @@ function criaGameOver() {
 				canvas.height / 3.5,
 				larg,
 				alt
+			);
+				//desenha texto com a pontuação do jogador
+			contexto.font = `35px "VT323"`;
+			contexto.textAlign = `right`;
+			contexto.fillStyle = `black`;
+			contexto.fillText(
+				`${globais.placar.pontos}`,
+				canvas.width - 95,
+				canvas.height - 333
 			);
 		},
 
@@ -97,7 +102,7 @@ function criaGameOver() {
 			medalhaAtual = 0;
 		},
 	};
-	return gameOver, pontuacaoFinal;
+	return gameOver;
 }
 
 export default criaGameOver;
