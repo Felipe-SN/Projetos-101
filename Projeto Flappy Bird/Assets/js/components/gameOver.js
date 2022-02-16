@@ -1,4 +1,4 @@
-import { canvas, contexto, globais, sprites, frames } from '../jogo.js';
+import { canvas, contexto, globais, sprites } from '../jogo.js';
 
 /// [parâmetros e funções usadas na tela de fim do jogo, na mensagem "Game Over"]
 let medalhaAtual = 0;
@@ -39,7 +39,7 @@ function criaGameOver() {
     ],
 
     atualizaMedalha() {
-      const intervaloDePontos = 50;
+      const intervaloDePontos = 300;
       const passouOIntervalo =
         globais.placar.pontos % intervaloDePontos === 0 &&
         medalhaAtual < gameOver.medalhas.length - 1 &&
@@ -95,8 +95,15 @@ function criaGameOver() {
     },
 
     update() {
-      const intervaloDeFrames = 20;
-      const passouOIntervalo = frames % intervaloDeFrames === 0;
+      const bicoDoFlappy = globais.flappyBird.posX + globais.flappyBird.larg;
+      const canoOculto = globais.canos.pares.length == 0;
+      let passouOIntervalo = false;
+
+      if (!canoOculto) {
+        passouOIntervalo =
+          bicoDoFlappy >= globais.canos.pares[0].x &&
+          globais.canos.pares[0].x == 0;
+      }
 
       if (passouOIntervalo) {
         gameOver.atualizaMedalha();

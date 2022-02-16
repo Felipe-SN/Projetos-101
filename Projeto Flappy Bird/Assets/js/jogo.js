@@ -126,9 +126,15 @@ window.addEventListener(`click`, () => {
 });
 
 window.addEventListener('keydown', (event) => {
-  event.preventDefault();
-  const tecla = 'Space';
+  const tecla = ['Space', 'ArrowUp'];
+  tecla.forEach((tecla) => {
+    if (event.code == tecla) {
+      event.preventDefault();
+      telaAtiva.click();
+    }
+  });
   if (event.code == tecla) {
+    event.preventDefault();
     telaAtiva.click();
   }
 });

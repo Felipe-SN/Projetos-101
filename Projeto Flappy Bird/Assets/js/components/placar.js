@@ -1,4 +1,4 @@
-import { canvas, contexto, frames, telaAtiva, telas } from '../jogo.js';
+import { canvas, contexto, globais, telaAtiva, telas } from '../jogo.js';
 
 function criaPlacar() {
   const placar = {
@@ -17,8 +17,15 @@ function criaPlacar() {
     },
 
     update() {
-      const intervaloDeFrames = 100;
-      const passouOIntervalo = frames % intervaloDeFrames === 0;
+      const bicoDoFlappy = globais.flappyBird.posX + globais.flappyBird.larg;
+      const canoOculto = globais.canos.pares.length == 0;
+      let passouOIntervalo = false;
+
+      if (!canoOculto) {
+        passouOIntervalo =
+          bicoDoFlappy >= globais.canos.pares[0].x &&
+          globais.canos.pares[0].x == 0;
+      }
 
       if (passouOIntervalo) {
         placar.pontos += 10;

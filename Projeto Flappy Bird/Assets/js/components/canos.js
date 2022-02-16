@@ -1,12 +1,12 @@
 import {
   canvas,
   contexto,
+  frames,
   globais,
   hitSound,
   sprites,
-  trocarTela,
   telas,
-  frames,
+  trocarTela,
 } from '../jogo.js';
 
 /// [parâmetros e funções usadas na criação dinâmica de canos na tela]
@@ -73,8 +73,9 @@ function criaCanos() {
     temColisaoComPlayer(par) {
       const cabecaDoFlappy = globais.flappyBird.posY;
       const peDoFlappy = globais.flappyBird.posY + globais.flappyBird.alt;
+      const bicoDoFlappy = globais.flappyBird.posX + globais.flappyBird.larg;
 
-      if (globais.flappyBird.posX + globais.flappyBird.larg >= par.x) {
+      if (bicoDoFlappy >= par.x) {
         if (cabecaDoFlappy <= par.canoCeu.y) {
           return true;
         }
@@ -100,7 +101,6 @@ function criaCanos() {
         par.x = par.x - 2;
 
         if (canos.temColisaoComPlayer(par)) {
-          console.log(`Você Perdeu!`);
           hitSound.play();
           trocarTela(telas.gameOver);
         }

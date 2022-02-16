@@ -9,7 +9,7 @@ import {
   telaAtiva,
 } from '../jogo.js';
 
-/// [parametros e funções usadas no Flappy-Bird]
+/// [parâmetros e funções usadas no Flappy-Bird]
 function colisao(flappyBird, chao) {
   if (flappyBird.posY >= chao.posY - flappyBird.alt) {
     return true;
