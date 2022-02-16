@@ -1,117 +1,117 @@
 import {
-	canvas,
-	contexto,
-	globais,
-	hitSound,
-	sprites,
-	trocarTela,
-	telas,
-	frames,
+  canvas,
+  contexto,
+  globais,
+  hitSound,
+  sprites,
+  trocarTela,
+  telas,
+  frames,
 } from '../jogo.js';
 
-/// [parametros e funções usadas na criação dinamica de canos na tela]
+/// [parâmetros e funções usadas na criação dinâmica de canos na tela]
 function criaCanos() {
-	const canos = {
-		larg: 52,
-		alt: 400,
-		chao: {
-			sX: 0,
-			sY: 169,
-		},
-		ceu: {
-			sX: 52,
-			sY: 169,
-		},
-		espaco: 80,
-		desenha() {
-			canos.pares.forEach(function (par) {
-				const yRandom = par.y;
-				const espacamentoCanos = 90;
+  const canos = {
+    larg: 52,
+    alt: 400,
+    chao: {
+      sX: 0,
+      sY: 169,
+    },
+    ceu: {
+      sX: 52,
+      sY: 169,
+    },
+    espaco: 80,
+    desenha() {
+      canos.pares.forEach(function (par) {
+        const yRandom = par.y;
+        const espacamentoCanos = 90;
 
-				const canoCeuX = par.x;
-				const canoCeuY = yRandom;
+        const canoCeuX = par.x;
+        const canoCeuY = yRandom;
 
-				// [Cano do Céu]
-				contexto.drawImage(
-					sprites,
-					canos.ceu.sX,
-					canos.ceu.sY,
-					canos.larg,
-					canos.alt,
-					canoCeuX,
-					canoCeuY,
-					canos.larg,
-					canos.alt
-				);
+        // [Cano do Céu]
+        contexto.drawImage(
+          sprites,
+          canos.ceu.sX,
+          canos.ceu.sY,
+          canos.larg,
+          canos.alt,
+          canoCeuX,
+          canoCeuY,
+          canos.larg,
+          canos.alt
+        );
 
-				const canoChaoX = par.x;
-				const canoChaoY = canos.alt + espacamentoCanos + yRandom;
-				// [Cano do Chão]
-				contexto.drawImage(
-					sprites,
-					canos.chao.sX,
-					canos.chao.sY,
-					canos.larg,
-					canos.alt,
-					canoChaoX,
-					canoChaoY,
-					canos.larg,
-					canos.alt
-				);
+        const canoChaoX = par.x;
+        const canoChaoY = canos.alt + espacamentoCanos + yRandom;
+        // [Cano do Chão]
+        contexto.drawImage(
+          sprites,
+          canos.chao.sX,
+          canos.chao.sY,
+          canos.larg,
+          canos.alt,
+          canoChaoX,
+          canoChaoY,
+          canos.larg,
+          canos.alt
+        );
 
-				par.canoCeu = {
-					x: canoCeuX,
-					y: canos.alt + canoCeuY,
-				};
-				par.canoChao = {
-					x: canoChaoX,
-					y: canoChaoY,
-				};
-			});
-		},
+        par.canoCeu = {
+          x: canoCeuX,
+          y: canos.alt + canoCeuY,
+        };
+        par.canoChao = {
+          x: canoChaoX,
+          y: canoChaoY,
+        };
+      });
+    },
 
-		temColisaoComPlayer(par) {
-			const cabecaDoFlappy = globais.flappyBird.posY;
-			const peDoFlappy = globais.flappyBird.posY + globais.flappyBird.alt;
+    temColisaoComPlayer(par) {
+      const cabecaDoFlappy = globais.flappyBird.posY;
+      const peDoFlappy = globais.flappyBird.posY + globais.flappyBird.alt;
 
-			if (globais.flappyBird.posX + globais.flappyBird.larg >= par.x) {
-				if (cabecaDoFlappy <= par.canoCeu.y) {
-					return true;
-				}
+      if (globais.flappyBird.posX + globais.flappyBird.larg >= par.x) {
+        if (cabecaDoFlappy <= par.canoCeu.y) {
+          return true;
+        }
 
-				if (peDoFlappy >= par.canoChao.y) {
-					return true;
-				}
-			}
-			return false;
-		},
+        if (peDoFlappy >= par.canoChao.y) {
+          return true;
+        }
+      }
+      return false;
+    },
 
-		pares: [],
-		update() {
-			const passou100Frames = frames % 100 === 0;
-			if (passou100Frames) {
-				canos.pares.push({
-					x: canvas.width,
-					y: -150 * (Math.random() + 1),
-				});
-			}
+    pares: [],
+    update() {
+      const passou100Frames = frames % 100 === 0;
+      if (passou100Frames) {
+        canos.pares.push({
+          x: canvas.width,
+          y: -150 * (Math.random() + 1),
+        });
+      }
 
-			canos.pares.forEach(function (par) {
-				par.x = par.x - 2;
+      canos.pares.forEach(function (par) {
+        par.x = par.x - 2;
 
-				if (canos.temColisaoComPlayer(par)) {
-					console.log(`Você Perdeu!`);
-					hitSound.play();
-					trocarTela(telas.gameOver);
-				}
+        if (canos.temColisaoComPlayer(par)) {
+          console.log(`Você Perdeu!`);
+          hitSound.play();
+          trocarTela(telas.gameOver);
+        }
 
-				if (par.x + canos.larg <= 0) {
-					canos.pares.shift();
-				}
-			});
-		},
-	};
-	return canos;
+        if (par.x + canos.larg <= 0) {
+          canos.pares.shift();
+        }
+      });
+    },
+  };
+  return canos;
 }
 
 export default criaCanos;

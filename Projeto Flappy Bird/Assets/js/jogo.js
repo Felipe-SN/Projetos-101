@@ -8,7 +8,7 @@ import criaTelaInicio from './components/inicio.js';
 
 console.log('[DevSoutinho] Flappy Bird');
 console.log(
-	'Inscreva-se no canal :D https://www.youtube.com/channel/UCzR2u5RWXWjUh7CwLSvbitA'
+  'Inscreva-se no canal :D https://www.youtube.com/channel/UCzR2u5RWXWjUh7CwLSvbitA'
 );
 
 let frames = 0;
@@ -25,125 +25,125 @@ const contexto = canvas.getContext('2d');
 const globais = {};
 let telaAtiva = {};
 function trocarTela(novaTela) {
-	telaAtiva = novaTela;
+  telaAtiva = novaTela;
 
-	if (telaAtiva.iniciar) {
-		telaAtiva.iniciar();
-	}
+  if (telaAtiva.iniciar) {
+    telaAtiva.iniciar();
+  }
 }
 
 const telas = {
-	inicio: {
-		iniciar() {
-			globais.gameOver = criaGameOver();
-			globais.planoDeFundo = criaPlanoDeFundo();
-			globais.flappyBird = criaPlayer();
-			globais.chao = criaChao();
-			globais.canos = criaCanos();
-			globais.getReady = criaTelaInicio();
-		},
+  inicio: {
+    iniciar() {
+      globais.gameOver = criaGameOver();
+      globais.planoDeFundo = criaPlanoDeFundo();
+      globais.flappyBird = criaPlayer();
+      globais.chao = criaChao();
+      globais.canos = criaCanos();
+      globais.getReady = criaTelaInicio();
+    },
 
-		desenha() {
-			globais.planoDeFundo.desenha();
-			globais.flappyBird.desenha();
-			globais.chao.desenha();
-			globais.getReady.desenha();
-		},
+    desenha() {
+      globais.planoDeFundo.desenha();
+      globais.flappyBird.desenha();
+      globais.chao.desenha();
+      globais.getReady.desenha();
+    },
 
-		click() {
-			trocarTela(telas.gamePlay);
-		},
+    click() {
+      trocarTela(telas.gamePlay);
+    },
 
-		update() {
-			globais.chao.update();
-			globais.planoDeFundo.update();
-		},
-	},
+    update() {
+      globais.chao.update();
+      globais.planoDeFundo.update();
+    },
+  },
 
-	gamePlay: {
-		iniciar() {
-			globais.placar = criaPlacar();
-		},
+  gamePlay: {
+    iniciar() {
+      globais.placar = criaPlacar();
+    },
 
-		desenha() {
-			globais.planoDeFundo.desenha();
-			globais.flappyBird.desenha();
-			globais.canos.desenha();
-			globais.chao.desenha();
-			globais.placar.desenha();
-		},
+    desenha() {
+      globais.planoDeFundo.desenha();
+      globais.flappyBird.desenha();
+      globais.canos.desenha();
+      globais.chao.desenha();
+      globais.placar.desenha();
+    },
 
-		click() {
-			globais.flappyBird.sobe();
-		},
+    click() {
+      globais.flappyBird.sobe();
+    },
 
-		update() {
-			globais.gameOver.update();
-			globais.planoDeFundo.update();
-			globais.canos.update();
-			globais.chao.update();
-			globais.flappyBird.update();
-			globais.placar.update();
-		},
-	},
+    update() {
+      globais.gameOver.update();
+      globais.planoDeFundo.update();
+      globais.canos.update();
+      globais.chao.update();
+      globais.flappyBird.update();
+      globais.placar.update();
+    },
+  },
 
-	gameOver: {
-		iniciar() {
-			globais.gameOver = criaGameOver();
-		},
+  gameOver: {
+    iniciar() {
+      globais.gameOver = criaGameOver();
+    },
 
-		desenha() {
-			globais.placar.desenha();
-			globais.planoDeFundo.desenha();
-			globais.flappyBird.desenha();
-			globais.canos.desenha();
-			globais.chao.desenha();
-			globais.gameOver.desenha();
-		},
+    desenha() {
+      globais.placar.desenha();
+      globais.planoDeFundo.desenha();
+      globais.flappyBird.desenha();
+      globais.canos.desenha();
+      globais.chao.desenha();
+      globais.gameOver.desenha();
+    },
 
-		update() {},
+    update() {},
 
-		click() {
-			trocarTela(telas.inicio);
-			globais.gameOver.click();
-		},
-	},
+    click() {
+      trocarTela(telas.inicio);
+      globais.gameOver.click();
+    },
+  },
 };
 
 function loop() {
-	telaAtiva.desenha();
-	telaAtiva.update();
+  telaAtiva.desenha();
+  telaAtiva.update();
 
-	frames += 1;
+  frames += 1;
 
-	requestAnimationFrame(loop);
+  requestAnimationFrame(loop);
 }
 
-function leTeclado(event) {
-	const espaco = 32;
-	if (event.keyCode == espaco) {
-		telaAtiva.click();
-	}
-}
-
-window.addEventListener(`click`, function () {
-	if (telaAtiva.click) {
-		telaAtiva.click();
-	}
+window.addEventListener(`click`, () => {
+  if (telaAtiva.click) {
+    telaAtiva.click();
+  }
 });
 
-document.onkeydown = leTeclado;
+window.addEventListener('keydown', (event) => {
+  event.preventDefault();
+  const tecla = 'Space';
+  if (event.code == tecla) {
+    telaAtiva.click();
+  }
+});
+
 trocarTela(telas.inicio);
 loop();
 
 export {
-	canvas,
-	contexto,
-	globais,
-	hitSound,
-	sprites,
-	trocarTela,
-	telas,
-	frames,
-	telaAtiva,
+  canvas,
+  contexto,
+  globais,
+  hitSound,
+  sprites,
+  trocarTela,
+  telas,
+  frames,
+  telaAtiva,
 };
