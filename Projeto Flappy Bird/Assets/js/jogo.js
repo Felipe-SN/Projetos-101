@@ -5,6 +5,7 @@ import criaPlacar from './components/placar.js';
 import criaPlanoDeFundo from './components/planoDeFundo.js';
 import criaPlayer from './components/player.js';
 import criaTelaInicio from './components/inicio.js';
+import comandos from './controllers/commands.js';
 
 console.log('[DevSoutinho] Flappy Bird');
 console.log(
@@ -119,25 +120,9 @@ function loop() {
   requestAnimationFrame(loop);
 }
 
-window.addEventListener(`click`, () => {
-  if (telaAtiva.click) {
-    telaAtiva.click();
-  }
-});
+window.addEventListener(`click`, comandos);
 
-window.addEventListener('keydown', (event) => {
-  const tecla = ['Space', 'ArrowUp'];
-  tecla.forEach((tecla) => {
-    if (event.code == tecla) {
-      event.preventDefault();
-      telaAtiva.click();
-    }
-  });
-  if (event.code == tecla) {
-    event.preventDefault();
-    telaAtiva.click();
-  }
-});
+window.addEventListener('keydown', comandos);
 
 trocarTela(telas.inicio);
 loop();
