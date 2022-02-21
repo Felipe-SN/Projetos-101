@@ -44,7 +44,12 @@ function criaPlayer() {
 
       flappyBird.velo += flappyBird.grav;
       flappyBird.posY += flappyBird.velo;
-      sounds.caiuSound.play();
+
+      const caindo = Math.sqrt(flappyBird.posY * flappyBird.velo) > 35;
+
+      if (caindo) {
+        sounds.caiuSound.play();
+      }
     },
 
     movimentos: [

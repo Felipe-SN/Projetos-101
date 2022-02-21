@@ -36,7 +36,7 @@ function criaPlacar() {
 
       if (passouOIntervalo) {
         placar.pontos += 10;
-        sounds.pontoSound.play(); 
+        sounds.pontoSound.play();
       }
     },
   };

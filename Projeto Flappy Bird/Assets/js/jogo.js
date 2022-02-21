@@ -15,22 +15,14 @@ console.log(
 let frames = 0;
 
 const sounds = {
-  caiuSound: new Audio(),
+  caiuSound: new Audio('./assets/sounds/caiu.wav'),
 
-  hitSound: new Audio(),
+  hitSound: new Audio('./assets/sounds/hit.wav'),
 
-  pontoSound: new Audio(),
+  pontoSound: new Audio('./assets/sounds/ponto.wav'),
 
-  puloSound: new Audio(),
+  puloSound: new Audio('./assets/sounds/pulo.wav'),
 };
-
-sounds.caiuSound.src = './assets/sounds/caiu.wav';
-
-sounds.hitSound.src = './assets/sounds/hit.wav';
-
-sounds.pontoSound.src = './assets/sounds/ponto.wav';
-
-sounds.puloSound.src = './assets/sounds/pulo.wav';
 
 const sprites = new Image();
 sprites.src = './assets/images/sprites.png';

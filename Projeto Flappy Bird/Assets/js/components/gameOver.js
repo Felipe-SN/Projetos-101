@@ -81,7 +81,7 @@ function criaGameOver() {
         larg,
         alt
       );
-      //desenha texto com a pontuação do jogador
+      //desenha texto com a pontuação atual do jogador
       contexto.font = `35px "VT323"`;
       contexto.textAlign = `right`;
       contexto.shadowOffsetY = 2;
