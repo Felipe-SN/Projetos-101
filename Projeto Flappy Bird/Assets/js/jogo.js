@@ -14,8 +14,23 @@ console.log(
 
 let frames = 0;
 
-const hitSound = new Audio();
-hitSound.src = './assets/sounds/hit.wav';
+const sounds = {
+  caiuSound: new Audio(),
+
+  hitSound: new Audio(),
+
+  pontoSound: new Audio(),
+
+  puloSound: new Audio(),
+};
+
+sounds.caiuSound.src = './assets/sounds/caiu.wav';
+
+sounds.hitSound.src = './assets/sounds/hit.wav';
+
+sounds.pontoSound.src = './assets/sounds/ponto.wav';
+
+sounds.puloSound.src = './assets/sounds/pulo.wav';
 
 const sprites = new Image();
 sprites.src = './assets/images/sprites.png';
@@ -25,6 +40,7 @@ const contexto = canvas.getContext('2d');
 
 const globais = {};
 let telaAtiva = {};
+
 function trocarTela(novaTela) {
   telaAtiva = novaTela;
 
@@ -131,7 +147,7 @@ export {
   canvas,
   contexto,
   globais,
-  hitSound,
+  sounds,
   sprites,
   trocarTela,
   telas,

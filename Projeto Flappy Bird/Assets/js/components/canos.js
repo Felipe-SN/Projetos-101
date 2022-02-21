@@ -3,7 +3,7 @@ import {
   contexto,
   frames,
   globais,
-  hitSound,
+  sounds,
   sprites,
   telas,
   trocarTela,
@@ -101,7 +101,7 @@ function criaCanos() {
         par.x = par.x - 2;
 
         if (canos.temColisaoComPlayer(par)) {
-          hitSound.play();
+          sounds.hitSound.play();
           trocarTela(telas.gameOver);
         }
 

@@ -1,7 +1,7 @@
 import {
   contexto,
   globais,
-  hitSound,
+  sounds,
   sprites,
   trocarTela,
   telas,
@@ -31,18 +31,20 @@ function criaPlayer() {
     subir: 4.6,
 
     sobe() {
+      sounds.puloSound.play();
       flappyBird.velo = -flappyBird.subir;
     },
 
     update() {
       if (colisao(flappyBird, globais.chao)) {
-        hitSound.play();
+        sounds.hitSound.play();
         trocarTela(telas.gameOver);
         return;
       }
 
       flappyBird.velo += flappyBird.grav;
       flappyBird.posY += flappyBird.velo;
+      sounds.caiuSound.play();
     },
 
     movimentos: [

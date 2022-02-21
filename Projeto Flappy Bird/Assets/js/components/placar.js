@@ -1,4 +1,11 @@
-import { canvas, contexto, globais, telaAtiva, telas } from '../jogo.js';
+import {
+  canvas,
+  contexto,
+  sounds,
+  globais,
+  telaAtiva,
+  telas,
+} from '../jogo.js';
 
 function criaPlacar() {
   const placar = {
@@ -29,6 +36,7 @@ function criaPlacar() {
 
       if (passouOIntervalo) {
         placar.pontos += 10;
+        sounds.pontoSound.play(); 
       }
     },
   };
