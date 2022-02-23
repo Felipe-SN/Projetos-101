@@ -18,6 +18,18 @@ function colisao(flappyBird, chao) {
   }
 }
 
+function caindo(flappyBird) {
+  const alcanceValido = 6;
+  const veloAtual = Math.round(flappyBird.velo);
+  const detectaQueda = veloAtual == alcanceValido;
+
+  if (detectaQueda) {
+    if (sounds.caiuSound.paused) {
+      sounds.caiuSound.play();
+    }
+  }
+}
+
 function criaPlayer() {
   const flappyBird = {
     srcX: 0,
@@ -45,11 +57,7 @@ function criaPlayer() {
       flappyBird.velo += flappyBird.grav;
       flappyBird.posY += flappyBird.velo;
 
-      const caindo = Math.sqrt(flappyBird.posY) > 13.5;
-
-      if (caindo) {
-        sounds.caiuSound.play();
-      }
+      caindo(flappyBird);
     },
 
     movimentos: [
