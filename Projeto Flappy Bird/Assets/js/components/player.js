@@ -38,7 +38,7 @@ function criaPlayer() {
     alt: 24,
     posX: 10,
     posY: 50,
-    grav: 0.25,
+    grav: 0.2,
     velo: 0,
     subir: 4.6,
 
