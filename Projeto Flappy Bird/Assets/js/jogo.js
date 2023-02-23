@@ -10,13 +10,13 @@ import comandos from './controllers/commands.js';
 let frames = 0;
 
 const sounds = {
-  caiuSound: new Audio('./assets/sounds/caiu.wav'),
+  caiuSound: new Audio('../sounds/caiu.wav'),
 
-  hitSound: new Audio('./assets/sounds/hit.wav'),
+  hitSound: new Audio('../sounds/hit.wav'),
 
-  pontoSound: new Audio('./assets/sounds/ponto.wav'),
+  pontoSound: new Audio('../sounds/ponto.wav'),
 
-  puloSound: new Audio('./assets/sounds/pulo.wav'),
+  puloSound: new Audio('../sounds/pulo.wav'),
 };
 
 const sprites = new Image();
