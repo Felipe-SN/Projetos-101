@@ -7,11 +7,6 @@ import criaPlayer from './components/player.js';
 import criaTelaInicio from './components/inicio.js';
 import comandos from './controllers/commands.js';
 
-console.log('[DevSoutinho] Flappy Bird');
-console.log(
-  'Inscreva-se no canal :D https://www.youtube.com/channel/UCzR2u5RWXWjUh7CwLSvbitA'
-);
-
 let frames = 0;
 
 const sounds = {
