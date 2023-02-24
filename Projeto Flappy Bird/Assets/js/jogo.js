@@ -20,7 +20,7 @@ const sounds = {
 };
 
 const sprites = new Image();
-sprites.src = './assets/images/sprites.png';
+sprites.src = '../images/sprites.png';
 
 const canvas = document.querySelector('canvas');
 const contexto = canvas.getContext('2d');
