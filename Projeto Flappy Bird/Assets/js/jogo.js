@@ -1,14 +1,13 @@
+let telaAtiva = {};
 let frames = 0;
 let medalhaAtual = 0;
 
 const globais = {};
 const canvas = document.querySelector('canvas');
 const contexto = canvas.getContext('2d');
-
-const hitSound = new Audio('./Assets/effects/hit.wav');
-
+const hitSound = new Audio('./assets/sounds/hit.wav');
 const sprites = new Image();
-sprites.src = './Assets/img/sprites.png';
+sprites.src = './assets/img/sprites.png';
 
 /// [parâmetros e funções usadas para criar o cenário]
 /// [Plano de fundo do cenário]
@@ -431,15 +430,6 @@ function criaGameOver() {
 
 /// [Telas]
 
-let telaAtiva = {};
-function trocarTela(novaTela) {
-  telaAtiva = novaTela;
-
-  if (telaAtiva.iniciar) {
-    telaAtiva.iniciar();
-  }
-}
-
 const telas = {
   inicio: {
     iniciar() {
@@ -511,6 +501,14 @@ const telas = {
     },
   },
 };
+
+function trocarTela(novaTela) {
+  telaAtiva = novaTela;
+
+  if (telaAtiva.iniciar) {
+    telaAtiva.iniciar();
+  }
+}
 
 function loop() {
   telaAtiva.desenha();
