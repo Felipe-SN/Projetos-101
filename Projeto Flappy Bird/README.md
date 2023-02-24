@@ -1,7 +1,6 @@
 # Flappy Bird
 
-<img src="https://img.shields.io/github/languages/top/felipe-sn/projetos-101?color=yellow&style=for-the-badge"/>  <img src="https://img.shields.io/badge/Status-Em%20Desenvolvimento-orange?style=for-the-badge"/>  <img src="https://img.shields.io/badge/Licence-MIT-brightgreen?style=for-the-badge"/>
-
+<img src="https://img.shields.io/github/languages/top/felipe-sn/projetos-101?color=yellow&style=for-the-badge"/> <img src="https://img.shields.io/badge/Status-Em%20Desenvolvimento-orange?style=for-the-badge"/> <img src="https://img.shields.io/badge/Licence-MIT-brightgreen?style=for-the-badge"/>
 
 ## Sobre
 
@@ -20,6 +19,8 @@ Clique em qualquer lugar na tela e o jogo vai começar!
 <hr/>
 
 ### O projeto que usei como base foi feito no canal Dev Soutinho fortalece o projeto dele e se [inscreve lá =D](https://www.youtube.com/watch?v=jOAU81jdi-c&list=PLTcmLKdIkOWmeNferJ292VYKBXydGeDej)
+
+<hr/>
 
 # Flappy Bird: Dev Soutinho
 

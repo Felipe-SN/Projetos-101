@@ -1,3 +1,4 @@
+import comandos from './controllers/commands.js';
 import criaCanos from './components/canos.js';
 import criaChao from './components/chao.js';
 import criaGameOver from './components/gameOver.js';
@@ -5,27 +6,27 @@ import criaPlacar from './components/placar.js';
 import criaPlanoDeFundo from './components/planoDeFundo.js';
 import criaPlayer from './components/player.js';
 import criaTelaInicio from './components/inicio.js';
-import comandos from './controllers/commands.js';
 
 let frames = 0;
 
+const globais = {};
+
 const sounds = {
-  caiuSound: new Audio('../sounds/caiu.wav'),
+  caiuSound: new Audio('./Assets/sounds/caiu.wav'),
 
-  hitSound: new Audio('../sounds/hit.wav'),
+  hitSound: new Audio('./Assets/sounds/hit.wav'),
 
-  pontoSound: new Audio('../sounds/ponto.wav'),
+  pontoSound: new Audio('./Assets/sounds/ponto.wav'),
 
-  puloSound: new Audio('../sounds/pulo.wav'),
+  puloSound: new Audio('./Assets/sounds/pulo.wav'),
 };
 
 const sprites = new Image();
-sprites.src = '../images/sprites.png';
+sprites.src = './Assets/images/sprites.png';
 
 const canvas = document.querySelector('canvas');
 const contexto = canvas.getContext('2d');
 
-const globais = {};
 let telaAtiva = {};
 
 function trocarTela(novaTela) {
